@@ -1,0 +1,21 @@
+h1. spree-price-variations
+
+h2. Installation
+
+<pre>
+gem install gruff
+script/extension git://github.com/kpitn/spree-price-variations.git
+</pre>
+
+h2. Use
+
+*In products/show.html*
+<pre>
+        <tr>
+          <td colspan="2">
+            <h2><%= t('price_variations') %></h2>
+            <%= image_tag("products/#{@product.id}/prices.png") if
+            File::exist?("#{RAILS_ROOT}/public/images/products/#{@product.id}/prices.png") %>
+          </td>
+        </tr>
+</pre>
