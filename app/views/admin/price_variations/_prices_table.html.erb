@@ -1,0 +1,29 @@
+<table class="basic-table">
+  <thead>
+  	<tr>
+  		<th>Date</th>
+  		<th><%= t("price") %></th>
+  		<th colspan="2"><%= t("action") %></th>
+  	</tr>
+  </thead>
+  <tbody>
+    <% price_variations.each do |price| %>
+      <tr id="<%= dom_id(price, :sel)%>">
+        <td valign="top"><%= price.change_date %></td>
+        <td valign="top"><%= price.value %></td>
+  	    <td valign="top">
+          <%= link_to t('edit'),:action=>:edit,:id=>price.id %>
+		      | <%= link_to_remote t('remove'),
+		                         :url => remove_admin_product_price_variation_url(@product, price),
+		                         :loading => "Element.show(#{dom_id(price, :rem_spinner)})",
+		                         :update => 'selected-prices',
+		                         :complete => "$('#{dom_id(price, :sel)}').remove(); Element.hide(#{dom_id(price, :rem_spinner)});" %>
+          <%= image_tag "spinner.gif", :style => "display:none", :id => "#{dom_id(price, :rem_spinner)}" %>
+  	    </td>        
+      </tr>
+    <% end %>
+    <% if price_variations.empty? %>
+     <tr><td colspan="2"><%= t('none') %>.</td></tr>
+    <% end %>
+  </tbody>
+</table>

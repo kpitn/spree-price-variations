@@ -1,0 +1,7 @@
+<%= render :partial => 'shared/product_sub_menu' %>
+<h1><%= t("price_variation")%></h1>
+<%= render :partial => 'shared/product_tabs', :locals => {:current => "price_variation"} %>
+
+<div id="selected-prices">
+  <%= render :partial => "prices_table", :locals => {:price_variations => @price_variations} %>
+</div>

@@ -1,0 +1,9 @@
+<table>
+  <tr>
+    <td><%= t("price")%>: </td>
+    <td>
+      <%=error_message_on :product, :name%>
+      <%=  text_field :price_variation, :value %>
+    </td>
+    </tr>
+</table>
