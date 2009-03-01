@@ -4,7 +4,7 @@ h2. Installation
 
 <pre>
 gem install gruff
-script/extension git://github.com/kpitn/spree-price-variations.git
+script/extension install git://github.com/kpitn/spree-price-variations.git
 </pre>
 
 h2. Use
