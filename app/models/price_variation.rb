@@ -6,16 +6,18 @@ class PriceVariation < ActiveRecord::Base
 
   named_scope :ordered, :order=>"change_date DESC"
 
-  private
 
     def draw_graph
       require 'gruff'
 
-      g = Gruff::Line.new(150)  #width size
+
+
+      g = Gruff::Line.new("270x100")  #width size
+      g.theme=self.theme_spree
       g.hide_legend=true
       g.left_margin=0
       g.bottom_margin=0
-      g.marker_font_size=50 #Font size of label
+      g.marker_font_size=30 #Font size of label
 
       prices=PriceVariation.find_by_sql(" SELECT *
       FROM price_variations
@@ -64,4 +66,24 @@ class PriceVariation < ActiveRecord::Base
       g.write("#{directory}/prices.png")
     end
 
+    protected
+      def theme_spree
+        # Colors
+        @yellow='#f7a50d'
+        @green = '#00ff00'
+        @grey = '#333333'
+        @orange = '#ff5d00'
+        @red = '#f61100'
+        @white = 'white'
+        @light_grey = '#999999'
+        @black = 'black'
+        @colors = [@yellow,@orange,@green, @grey, @red, @white, @light_grey, @black]
+
+        theme = {
+          :colors => @colors,
+          :marker_color => 'white',
+          :font_color => 'white',
+          :background_colors => ['#2191c0', '#0078ae']
+        }
+      end
 end
