@@ -10,7 +10,12 @@ namespace :price_variation do
 
       Product.find(:all).each do |product|
         price_variation=PriceVariation.find(:first,:conditions=>["product_id=?",product.id])
-        price_variation.draw_graph
+        if !price_variation.nil?
+          price_variation.draw_graph
+        else
+           price_variation=PriceVariation.create({:product_id=>product.id,:value=>product.master_price,:change_date=>Date.today.to_s[0..6]})
+           price_variation.draw_graph
+        end
         p "Draw graph Product =#{product.name}"
       end
     end
