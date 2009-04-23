@@ -15,7 +15,7 @@ class PriceVariation < ActiveRecord::Base
       g = Gruff::Line.new("270x100")  #width size
       g.theme=self.theme_spree
       g.hide_legend=true
-      g.left_margin=0
+      g.left_margin=10
       g.bottom_margin=0
       g.marker_font_size=30 #Font size of label
 
