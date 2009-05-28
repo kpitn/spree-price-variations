@@ -45,7 +45,7 @@ class PriceVariation < ActiveRecord::Base
         end
         #Show only even month
         if index.modulo(2)!=0
-          y_axis.merge!({index=>I18n.t(:"activerecord.date.abbr_month_names")[date_temp.month]})
+          y_axis.merge!({index=>I18n.t(:"date.abbr_month_names")[date_temp.month]})
         end
         date_temp=date_temp>>1
       end
@@ -61,9 +61,10 @@ class PriceVariation < ActiveRecord::Base
       end
 
       directory="#{RAILS_ROOT}/public/images/products/#{prices.first.product_id}"
+      p "DIRECTORY =#{directory}"
       FileUtils.makedirs(directory) if !File::exist?(directory)
 
-      #g.write("#{directory}/prices.png")
+      g.write("#{directory}/prices.png")
     end
 
     protected
