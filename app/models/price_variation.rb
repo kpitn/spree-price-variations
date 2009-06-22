@@ -12,12 +12,16 @@ class PriceVariation < ActiveRecord::Base
 
 
 
-      g = Gruff::Line.new("270x100")  #width size
+      g = Gruff::Line.new("200x125")  #width size
       g.theme=self.theme_spree
       g.hide_legend=true
+      g.top_margin=5
       g.left_margin=10
+      g.font = File.expand_path('usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono-Bold.ttf',"/")
+
+
       g.bottom_margin=0
-      g.marker_font_size=30 #Font size of label
+      g.marker_font_size=40 #Font size of label
 
       prices=PriceVariation.find_by_sql(" SELECT *
       FROM price_variations
@@ -61,7 +65,7 @@ class PriceVariation < ActiveRecord::Base
       end
 
       directory="#{RAILS_ROOT}/public/images/products/#{prices.first.product_id}"
-      p "DIRECTORY =#{directory}"
+
       FileUtils.makedirs(directory) if !File::exist?(directory)
 
       g.write("#{directory}/prices.png")
@@ -70,6 +74,7 @@ class PriceVariation < ActiveRecord::Base
     protected
       def theme_spree
         # Colors
+        @blue='#00c1cb'
         @yellow='#f7a50d'
         @green = '#00ff00'
         @grey = '#333333'
@@ -78,13 +83,13 @@ class PriceVariation < ActiveRecord::Base
         @white = 'white'
         @light_grey = '#999999'
         @black = 'black'
-        @colors = [@yellow,@orange,@green, @grey, @red, @white, @light_grey, @black]
+        @colors = [@blue,@yellow,@orange,@green, @grey, @red, @white, @light_grey, @black]
 
         theme = {
           :colors => @colors,
-          :marker_color => 'white',
-          :font_color => 'white',
-          :background_colors => ['#2191c0', '#0078ae']
+          :marker_color => '#7e7e7e',
+          :font_color => '#7e7e7e',
+          :background_colors => ['#ffffff', '#eeeeee']
         }
       end
 end
