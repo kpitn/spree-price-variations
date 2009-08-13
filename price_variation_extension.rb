@@ -14,12 +14,12 @@ class PriceVariationExtension < Spree::Extension
       after_save :save_price
 
       def save_price
-        if master_price_changed?
+        if regular_price_changed? or special_price_changed?
           price=PriceVariation.find(:first,:conditions=>{:product_id=>self.id,:change_date=>Date.today.to_s[0..6]})
           if price.nil?
-            PriceVariation.create({:product_id=>self.id,:value=>self.master_price,:change_date=>Date.today.to_s[0..6]})
+            PriceVariation.create({:product_id=>self.id,:value=>self.final_price,:change_date=>Date.today.to_s[0..6]})
           else
-            price.update_attributes({:value=>self.master_price})
+            price.update_attributes({:value=>self.final_price})
           end
         end
       end

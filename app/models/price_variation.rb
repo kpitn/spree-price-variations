@@ -61,7 +61,7 @@ class PriceVariation < ActiveRecord::Base
       end
 
       directory="#{RAILS_ROOT}/public/images/products/#{prices.first.product_id}"
-      p "DIRECTORY =#{directory}"
+
       FileUtils.makedirs(directory) if !File::exist?(directory)
 
       g.write("#{directory}/prices.png")
