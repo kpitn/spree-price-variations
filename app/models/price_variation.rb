@@ -64,7 +64,7 @@ class PriceVariation < ActiveRecord::Base
         g.minimum_value=0
       end
 
-      directory="#{RAILS_ROOT}/public/images/products/#{prices.first.product_id}"
+      directory="#{RAILS_ROOT}/public/assets/price_variation/#{prices.first.product_id}"
 
       FileUtils.makedirs(directory) if !File::exist?(directory)
 
