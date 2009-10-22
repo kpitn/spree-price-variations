@@ -68,7 +68,7 @@ class PriceVariation < ActiveRecord::Base
 
       FileUtils.makedirs(directory) if !File::exist?(directory)
 
-      g.write("#{directory}/prices.png")
+      Thread.new { g.write("#{directory}/prices.png") }
     end
 
     protected
